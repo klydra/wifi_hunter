@@ -1,4 +1,4 @@
-package com.example.wifi_hunter_example;
+package klingens13.wifi_hunter_example;
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity;

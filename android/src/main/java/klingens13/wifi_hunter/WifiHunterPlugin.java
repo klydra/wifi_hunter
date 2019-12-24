@@ -3,6 +3,8 @@ package klingens13.wifi_hunter;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 
+import androidx.annotation.NonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +16,7 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** WifiHunterPlugin */
-public class WiFiHunterPlugin implements FlutterPlugin, MethodCallHandler {
+class WiFiHunterPlugin implements FlutterPlugin, MethodCallHandler {
 
   private WifiManager wifiManager;
   WiFiReciever WiFiReciever;
