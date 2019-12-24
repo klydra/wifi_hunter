@@ -2,12 +2,9 @@ package klingens13.wifi_hunter;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
-import android.os.Handler;
 
-import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
@@ -17,42 +14,51 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** WifiHunterPlugin */
-public class WifiHunterPlugin implements FlutterPlugin, MethodCallHandler {
+public class WiFiHunterPlugin implements FlutterPlugin, MethodCallHandler {
 
-  private Handler handler = new Handler();
   private WifiManager wifiManager;
   WiFiReciever WiFiReciever;
-  ArrayList<List> finalScanResults;
-  int scanDelay = 3000; //-- Scan Delay in ms (default: 3000ms; Limitations in Android OS won't allow shorter anyways...)
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     final MethodChannel channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "wifi_hunter");
-    channel.setMethodCallHandler(new WifiHunterPlugin());
+    channel.setMethodCallHandler(new WiFiHunterPlugin());
     wifiManager = (WifiManager)flutterPluginBinding.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
   }
 
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "wifi_hunter");
-    channel.setMethodCallHandler(new WifiHunterPlugin());
+    channel.setMethodCallHandler(new WiFiHunterPlugin());
   }
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+    WiFiReciever = new WiFiReciever(wifiManager);
     wifiManager.startScan();
-    handler.postDelayed(performScan, scanDelay);
-    result.success(finalScanResults);
+
+    switch (call.method) {
+      case "getPlatformVersion": {
+        result.success(android.os.Build.VERSION.RELEASE);
+      }
+      break;
+      case "huntWiFis": {
+        Map<String, Object> data = new HashMap();
+        data.put("SSIDS", WiFiReciever.getSSIDs());
+        data.put("BSSIDS", WiFiReciever.getBSSIDs());
+        data.put("CAPABILITES", WiFiReciever.getCapabilities());
+        data.put("SIGNALSTRENGTHS", WiFiReciever.getLevels());
+        data.put("FREQUENCY", WiFiReciever.getFrequencys());
+
+        result.success(data);
+      }
+      break;
+      default:
+        result.notImplemented();
+    }
   }
 
-  Runnable performScan = new Runnable() {
-    @Override
-    public void run() {
-      WiFiReciever = new WiFiReciever(wifiManager);
-      wifiManager.startScan();
-    }
-  };
-
   @Override
-  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+  public void onDetachedFromEngine(FlutterPluginBinding flutterPluginBinding) {
+
   }
 }

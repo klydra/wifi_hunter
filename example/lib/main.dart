@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  WifiInfoWrapper _wifiObject;
 
   @override
   void initState() {
@@ -20,35 +20,34 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
+    WifiInfoWrapper wifiObject;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await WifiHunter.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
+      wifiObject = await WifiHunter.wifiDetails;
+    } on PlatformException {}
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      _wifiObject = wifiObject;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    List<String> ssids = _wifiObject != null ? _wifiObject.SSIDs : "SSIDs in reach should show up any moment...";
+    String result = "Results : | ";
+    for (var i = 0; i < ssids.length; i++) {
+      result +=  ssids[i] + " | ";
+    }
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('WiFiHunter Example App'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text (result)
         ),
       ),
     );
