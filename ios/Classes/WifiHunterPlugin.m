@@ -1,4 +1,4 @@
-#import "WifiHunterPlugin.h"
+#import "WiFiHunterPlugin.h"
 #if __has_include(<wifi_hunter/wifi_hunter-Swift.h>)
 #import <wifi_hunter/wifi_hunter-Swift.h>
 #else
@@ -8,8 +8,8 @@
 #import "wifi_hunter-Swift.h"
 #endif
 
-@implementation WifiHunterPlugin
+@implementation WiFiHunterPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftWifiHunterPlugin registerWithRegistrar:registrar];
+  [SwiftWiFiHunterPlugin registerWithRegistrar:registrar];
 }
 @end

@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class SwiftWifiHunterPlugin: NSObject, FlutterPlugin {
+public class SwiftWiFiHunterPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "wifi_hunter", binaryMessenger: registrar.messenger())
-    let instance = SwiftWifiHunterPlugin()
+    let instance = SwiftWiFiHunterPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 

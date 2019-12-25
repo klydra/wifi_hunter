@@ -12,9 +12,9 @@ class WifiHunter {
 
   static Future<WifiInfoWrapper> get wifiDetails async {
     final Map<dynamic, dynamic> data =
-    await _channel.invokeMethod('getWifiDetails');
+    await _channel.invokeMethod('huntWiFis');
 
-    WifiInfoWrapper wifiInfoWrapper = WifiInfoWrapper.withMap(data);
+    WifiInfoWrapper wifiInfoWrapper = new WifiInfoWrapper.withMap(data);
     return wifiInfoWrapper;
   }
 }

@@ -16,8 +16,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    super.initState();
     initPlatformState();
+    super.initState();
   }
 
   Future<void> initPlatformState() async {
@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
     try {
       wifiObject = await WifiHunter.wifiDetails;
     } on PlatformException {}
-    if (!mounted) return;
+    //if (!mounted) return;
 
     setState(() {
       _wifiObject = wifiObject;
@@ -35,21 +35,36 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> ssids = _wifiObject != null ? _wifiObject.SSIDs : "SSIDs in reach should show up any moment...";
-    String result = "Results : | ";
-    for (var i = 0; i < ssids.length; i++) {
-      result +=  ssids[i] + " | ";
-    }
+    WifiHunter.wifiDetails;
+    if (_wifiObject != null) {
+      List<String> ssids = _wifiObject.SSIDs;
+      String result = "Results (availible SSIDs) : | ";
+      for (var i = 0; i < ssids.length; i++) {
+        result += ssids[i] + " | ";
+      }
 
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('WiFiHunter Example App'),
+      return MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('WiFiHunter Example App'),
+          ),
+          body: Center(
+              child: Text(result)
+          ),
         ),
-        body: Center(
-          child: Text (result)
+      );
+    } else {
+      WifiHunter.wifiDetails;
+      return MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('WiFiHunter Example App'),
+          ),
+          body: Center (
+            child: Text ("Scanning... Please wait..."),
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 }
