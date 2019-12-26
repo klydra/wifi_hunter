@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-class WifiHunter {
+class WiFiHunter {
   static const MethodChannel _channel = const MethodChannel('wifi_hunter');
 
   static Future<String> get platformVersion async {
@@ -10,25 +10,24 @@ class WifiHunter {
     return version;
   }
 
-  static Future<WifiInfoWrapper> get wifiDetails async {
-    final Map<dynamic, dynamic> data =
-    await _channel.invokeMethod('huntWiFis');
+  static Future<WiFiInfoWrapper> get huntRequest async {
+    final Map<dynamic, dynamic> data = await _channel.invokeMethod('huntWiFis');
 
-    WifiInfoWrapper wifiInfoWrapper = new WifiInfoWrapper.withMap(data);
+    WiFiInfoWrapper wifiInfoWrapper = new WiFiInfoWrapper.withMap(data);
     return wifiInfoWrapper;
   }
 }
 
-class WifiInfoWrapper {
-  List<String> _bssids;
-  List<String> _ssids;
-  List<String> _capabilities;
-  List<int> _singalStrengths;
-  List<int> _frequencys;
+class WiFiInfoWrapper {
+  List<dynamic> _bssids;
+  List<dynamic> _ssids;
+  List<dynamic> _capabilities;
+  List<dynamic> _singalStrengths;
+  List<dynamic> _frequencys;
 
-  WifiInfoWrapper();
+  WiFiInfoWrapper();
 
-  WifiInfoWrapper.withMap(Map<dynamic, dynamic> nativeInfo) {
+  WiFiInfoWrapper.withMap(Map<dynamic, dynamic> nativeInfo) {
     if (nativeInfo != null) {
       this._bssids = nativeInfo["BSSIDS"];
       this._ssids = nativeInfo["SSIDS"];
@@ -38,23 +37,23 @@ class WifiInfoWrapper {
     }
   }
 
-  List<String> get BSSIDs {
+  List<dynamic> get BSSIDs {
     return this._bssids;
   }
 
-  List<String> get SSIDs {
+  List<dynamic> get SSIDs {
     return this._ssids;
   }
 
-  List<String> get capabilities {
+  List<dynamic> get capabilities {
     return this._capabilities;
   }
 
-  List<int> get signalStrengths {
+  List<dynamic> get signalStrengths {
     return this._singalStrengths;
   }
 
-  List<int> get frequencys {
+  List<dynamic> get frequencys {
     return this._frequencys;
   }
 }

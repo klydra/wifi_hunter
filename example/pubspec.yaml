@@ -1,5 +1,5 @@
 name: wifi_hunter_example
-description: Demonstrates how to use the wifi_hunter plugin.
+description: Displays the functions of the wifi_hunter plugin.
 publish_to: 'none'
 
 environment:
@@ -21,7 +21,7 @@ dev_dependencies:
     path: ../
 
 # For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+# following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:

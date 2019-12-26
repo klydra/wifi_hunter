@@ -1,5 +1,5 @@
 group 'klingens13.wifi_hunter'
-version '1.0'
+version '1.0-SNAPSHOT'
 
 buildscript {
     repositories {
