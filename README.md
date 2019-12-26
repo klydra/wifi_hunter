@@ -1,14 +1,10 @@
 # wifi_hunter
 
-Wifi info wrapper android plugin
+A flutter package to hunt down info from all WiFi APs around you.
 
 ## Getting Started
-This Plugin is currently only supports android. IOS implementation to be release soon.
-Import the plugin.
-Listed are all the supported getter methods to query and retrieve Network Information on your android device.
-
-Below is an Example code of using the plugin in  flutter application to retrieve android only Network info.
-The WifiInfoWrapper class contains methods for some of the most useful Network infomation to be requested.
+The plugin only supports the android platform, and it's very unlikely to launch on iOS, because Apple refuses to provide permissions for that, so don't wait for that to come around.
+Credit where credit is due : This package is pretty much based on the wifi_info_plugin from @VTechJm, which you can check out here (https://github.com/VTechJm/wifi_info_plugin/).
 
 ```dart
 import 'package:flutter/services.dart';
@@ -24,67 +20,74 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  WifiInfoWrapper _wifiObject;
+  /* Defining the Info Wrapper */
+  WifiInfoWrapper _wifiObject;                                      
 
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    /* Initializing the Info-Wrapper */
+    initPlatformState();                                            
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    WifiInfoWrapper wifiObject;
-    // Platform messages may fail, so we use a try/catch PlatformException.
+    WiFiInfoWrapper wifiObject;
+    
+    /* Platform Exception may occour : try/catch */
     try {
-      wifiObject = await  WiFiHunterPlugin.wifiDetails;
+      wifiObject = await WiFiHunter.huntRequest;
+    } on PlatformException {}
 
-    }
-    on PlatformException{
-
-    }
-    if (!mounted) return;
-
+    /* syncing the Info-Wrappers */
     setState(() {
-
       _wifiObject = wifiObject;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-   String ipAddress = _wifiObject!=null?_wifiObject.ipAddress.toString():"ip";
+    /* Checking if Response was given already */
+    if (_wifiObject != null) {
+      /* Printing the responses */
+      print("WiFi Results (SSIDs) : ");
+      for (var i = 0; i < _wifiObject.SSIDs.length; i++) {
+        print("- " + _wifiObject.SSIDs[i]);
+      }
+    }
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('WiFiHunter Example App'),
         ),
-        body: Center(
-          child: Text('Running on:'+ ipAddress),
+        body: Center (
+          child: Text ("Scanning... Please check Log for results..."),
         ),
       ),
     );
   }
 }
 ```
-Below are valid getters on the WifiWrapper Class at instantiation
 
-  * ipAddress
-  * routerIp
-  * dns1
-  * dns2
-  * bssId
-  * ssid
-  * macAddress
-  * linkSpeed
-  * signalStrength
-  * frequency
-  * networkId
-  * connectionType
-  * isHiddenSSid
+## Functionality and Features
+Here is what infos you can get by using this package :
+
+  * SSIDs ...                         ```_wifiObject.SSIDs```
+  * BSSIDs ...                        ```_wifiObject.BSSIDs```
+  * Protocols ...                     ```_wifiObject.protocols```
+  * Frequencies ...                   ```_wifiObject.frequenies```
+  * Capabilities ...                  ```_wifiObject.capabilities```
+  
+    ... of all WiFi APs in reach.
+    
+
+The available __SSIDs__, __BSSIDs__ and __capabilities___ ___(= protocols, ex. EES, WPA2...)___ are returned as Java ```List<String>```,
+while the __frequencies__ and __signal strengths__ ___(dBm)___ are returned as ```List<Integer>```.
 
 
+If you want to run a scan again just execute ```initPlatformState();```, and your ```_wifiObject.``` results will be refreshed.
+Scans, for usual, can run every 3 seconds.
 
 
 
