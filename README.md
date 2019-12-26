@@ -89,6 +89,8 @@ while the __frequencies__ and __signal strengths__ ___(dBm)___ are returned as `
 If you want to run a scan again just execute ```initPlatformState();```, and your ```_wifiObject.``` results will be refreshed.
 Scans, for usual, can run every 3 seconds.
 
+If anyone wants to, _Pull requests are welcome_ 😉 
+
 
 
 
