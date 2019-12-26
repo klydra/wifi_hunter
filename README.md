@@ -4,7 +4,7 @@ A flutter package to hunt down info from all WiFi APs around you.
 
 ## Getting Started
 The plugin only supports the android platform, and it's very unlikely to launch on iOS, because Apple refuses to provide permissions for that, so don't wait for that to come around.
-Credit where credit is due : This package is pretty much based on the wifi_info_plugin from @VTechJm, which you can check out here (https://github.com/VTechJm/wifi_info_plugin/).
+Credit where credit is due : This package is pretty much based on the __wifi_info_plugin__ from __@VTechJm__, which you can check out here __(https://github.com/VTechJm/wifi_info_plugin/)__.
 
 ```dart
 import 'package:flutter/services.dart';
