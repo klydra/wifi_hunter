@@ -42,14 +42,14 @@ public class WiFiReciever {
                     List<String> BSSIDs = new ArrayList<String>();
                     List<String> SSIDs = new ArrayList<String>();
                     List<String> capabilities = new ArrayList<String>();
-                    List<Integer> frequencys = new ArrayList<Integer>();
+                    List<Integer> frequencies = new ArrayList<Integer>();
                     List<Integer> levels = new ArrayList<Integer>();
 
                     for (ScanResult scanResult : wifiList) {
                         BSSIDs.add(scanResult.BSSID);
                         SSIDs.add(scanResult.SSID);
                         capabilities.add(scanResult.capabilities);
-                        frequencys.add(scanResult.frequency);
+                        frequencies.add(scanResult.frequency);
                         levels.add(scanResult.level);
                     }
 
@@ -57,7 +57,7 @@ public class WiFiReciever {
                     data.put("SSIDS", SSIDs);
                     data.put("BSSIDS", BSSIDs);
                     data.put("CAPABILITES", capabilities);
-                    data.put("FREQUENCY", frequencys);
+                    data.put("FREQUENCIES", frequencies);
                     data.put("SIGNALSTRENGTHS", levels);
 
                     Log.i("T", "DATA : " + data.toString());

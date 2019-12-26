@@ -23,7 +23,7 @@ class WiFiInfoWrapper {
   List<dynamic> _ssids;
   List<dynamic> _capabilities;
   List<dynamic> _singalStrengths;
-  List<dynamic> _frequencys;
+  List<dynamic> _frequencies;
 
   WiFiInfoWrapper();
 
@@ -33,7 +33,7 @@ class WiFiInfoWrapper {
       this._ssids = nativeInfo["SSIDS"];
       this._capabilities = nativeInfo["CAPABILITES"];
       this._singalStrengths = nativeInfo["SIGNALSTRENGTHS"];
-      this._frequencys = nativeInfo["FREQUENCYS"];
+      this._frequencies = nativeInfo["FREQUENCIES"];
     }
   }
 
@@ -53,7 +53,7 @@ class WiFiInfoWrapper {
     return this._singalStrengths;
   }
 
-  List<dynamic> get frequencys {
-    return this._frequencys;
+  List<dynamic> get frequenies {
+    return this._frequencies;
   }
 }
