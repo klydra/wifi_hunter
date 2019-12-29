@@ -34,8 +34,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     if (_wifiObject != null) {
       print("WiFi Results (SSIDs) : ");
-      for (var i = 0; i < _wifiObject.SSIDs.length; i++) {
-        print("- " + _wifiObject.SSIDs[i]);
+      for (var i = 0; i < _wifiObject.ssids.length; i++) {
+        print("- " + _wifiObject.ssids[i]);
       }
     }
 

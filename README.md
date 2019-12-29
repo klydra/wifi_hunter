@@ -4,7 +4,7 @@ A flutter package to hunt down info from all WiFi APs around you.
 
 ## Getting Started
 The plugin only supports the android platform, and it's very unlikely to launch on iOS, because Apple refuses to provide permissions for that, so don't wait for that to come around.
-Credit where credit is due : This package is pretty much based on the __wifi_info_plugin__ from __@VTechJm__, which you can check out here __(https://github.com/VTechJm/wifi_info_plugin/)__.
+Credit where credit is due : This package is pretty much based on the __wifi_info_plugin__ from __@VTechJm__, which you can check out here __(https://github.com/VTechJm/wifi_info_plugin)__.
 
 ```dart
 import 'package:flutter/services.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   /* Defining the Info Wrapper */
-  WifiInfoWrapper _wifiObject;                                      
+  WiFiInfoWrapper _wifiObject;                                      
 
 
   @override
@@ -51,8 +51,8 @@ class _MyAppState extends State<MyApp> {
     if (_wifiObject != null) {
       /* Printing the responses */
       print("WiFi Results (SSIDs) : ");
-      for (var i = 0; i < _wifiObject.SSIDs.length; i++) {
-        print("- " + _wifiObject.SSIDs[i]);
+      for (var i = 0; i < _wifiObject.ssids.length; i++) {
+        print("- " + _wifiObject.ssids[i]);
       }
     }
 
@@ -73,16 +73,16 @@ class _MyAppState extends State<MyApp> {
 ## Functionality and Features
 Here is what infos you can get by using this package :
 
-  * SSIDs ...                         ```_wifiObject.SSIDs```
-  * BSSIDs ...                        ```_wifiObject.BSSIDs```
-  * Protocols ...                     ```_wifiObject.protocols```
+  * SSIDs ...                         ```_wifiObject.ssids```
+  * BSSIDs ...                        ```_wifiObject.bssids```
+  * Signal strength ...               ```_wifiObject.signalStrength```
   * Frequencies ...                   ```_wifiObject.frequenies```
   * Capabilities ...                  ```_wifiObject.capabilities```
   
     ... of all WiFi APs in reach.
     
 
-The available __SSIDs__, __BSSIDs__ and __capabilities___ ___(= protocols, ex. EES, WPA2...)___ are returned as Java ```List<String>```,
+The available __SSIDs__, __BSSIDs__ and __capabilities__ ___(= protocols, ex. EES, WPA2...)___ are returned as Java ```List<String>```,
 while the __frequencies__ and __signal strengths__ ___(dBm)___ are returned as ```List<Integer>```.
 
 
@@ -90,7 +90,6 @@ If you want to run a scan again just execute ```initPlatformState();```, and you
 Scans, for usual, can run every 3 seconds.
 
 If anyone wants to, _Pull requests are welcome_ 😉 
-
 
 
 

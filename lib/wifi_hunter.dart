@@ -37,11 +37,11 @@ class WiFiInfoWrapper {
     }
   }
 
-  List<dynamic> get BSSIDs {
+  List<dynamic> get bssids {
     return this._bssids;
   }
 
-  List<dynamic> get SSIDs {
+  List<dynamic> get ssids {
     return this._ssids;
   }
 
