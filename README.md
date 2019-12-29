@@ -79,7 +79,7 @@ Here is what infos you can get by using this package :
 
   * SSIDs ...                         ```_wifiObject.ssids```
   * BSSIDs ...                        ```_wifiObject.bssids```
-  * Signal strength ...               ```_wifiObject.signalStrength```
+  * Signal strength ...               ```_wifiObject.signalStrengths```
   * Frequencies ...                   ```_wifiObject.frequenies```
   * Capabilities ...                  ```_wifiObject.capabilities```
   
