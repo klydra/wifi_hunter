@@ -2,6 +2,10 @@
 
 A flutter package to hunt down info from all WiFi APs around you.
 
+<p><a href="https://pub.dartlang.org/packages/wifi_hunter/" rel="nofollow"><img alt="version" src="https://img.shields.io/pub/v/wifi_hunter.svg?style=flat-square" style="max-width:100%;"></a>
+<a href="https://github.com/klingens13/wifi_hunter/blob/master/LICENSE"><img alt="BSD License" src="https://img.shields.io/github/license/klingens13/wifi_hunter.svg?style=flat-square" style="max-width:100%;"></a>
+<a href="http://makeapullrequest.com" rel="nofollow"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" style="max-width:100%;"></a></p>
+
 ## Getting Started
 The plugin only supports the android platform, and it's very unlikely to launch on iOS, because Apple refuses to provide permissions for that, so don't wait for that to come around.
 Credit where credit is due : This package is pretty much based on the __wifi_info_plugin__ from __@VTechJm__, which you can check out here __(https://github.com/VTechJm/wifi_info_plugin)__.
