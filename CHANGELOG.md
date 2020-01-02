@@ -9,3 +9,7 @@
 ## 1.0.1+1
 
 * Invalid File Name
+
+## 1.0.2
+
+* Fix Application Exit

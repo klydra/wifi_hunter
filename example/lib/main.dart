@@ -15,29 +15,31 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    initPlatformState();
+    scanWiFi();
     super.initState();
   }
-  Future<void> initPlatformState() async {
+
+  Future<WiFiInfoWrapper> scanWiFi() async {
     WiFiInfoWrapper wifiObject;
 
     try {
       wifiObject = await WiFiHunter.huntRequest;
     } on PlatformException {}
 
-    setState(() {
-      _wifiObject = wifiObject;
-    });
+    return wifiObject;
+  }
+
+  Future<void> scanHandler() async {
+    _wifiObject = await scanWiFi();
+    print("WiFi Results (SSIDs) : ");
+    for (var i = 0; i < _wifiObject.ssids.length; i++) {
+      print("- " + _wifiObject.ssids[i]);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_wifiObject != null) {
-      print("WiFi Results (SSIDs) : ");
-      for (var i = 0; i < _wifiObject.ssids.length; i++) {
-        print("- " + _wifiObject.ssids[i]);
-      }
-    }
+    scanHandler();
 
     return MaterialApp(
       home: Scaffold(
@@ -45,8 +47,16 @@ class _MyAppState extends State<MyApp> {
           title: const Text('WiFiHunter Example App'),
         ),
         body: Center (
-          child: Text ("Scanning... Please check Log for results..."),
-        ),
+          child: Column (
+            children: <Widget>[
+              Text ("Scanning... Please check Log for results..."),
+              FlatButton (
+                child: Text ("ReScan (after prev. scan is finished; await...)"),
+                onPressed: () => scanHandler(),
+              )
+            ],
+          )
+        )
       ),
     );
   }

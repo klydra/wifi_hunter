@@ -21,17 +21,17 @@ import io.flutter.plugin.common.MethodChannel;
 public class WiFiReciever {
 
     Context context;
-    WifiManager wifiManager;
     MethodCall call;
     MethodChannel.Result result;
+    boolean resultSubmitted = false;
 
     public WiFiReciever(Context context, @NonNull MethodCall call, @NonNull final MethodChannel.Result result) {
         this.context = context;
         this.call = call;
         this.result = result;
 
-        Log.i("TAG", "HELLO3");
-        wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        final WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        wifiManager.setWifiEnabled(true);
 
         BroadcastReceiver wifiScanReceiver = new BroadcastReceiver() {
             @Override
@@ -60,21 +60,28 @@ public class WiFiReciever {
                     data.put("FREQUENCIES", frequencies);
                     data.put("SIGNALSTRENGTHS", levels);
 
-                    Log.i("T", "DATA : " + data.toString());
-                    result.success(data);
+                    if (!resultSubmitted) {
+                        result.success(data);
+                        resultSubmitted = true;
+                    }
                 } else {
                     Log.i("WiFiHunter - Reciever", "No results available!");
+                    result.error("404","No results available!", "No WiFi APs could be found");
                 }
             }
         };
-        context.registerReceiver(wifiScanReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        context.registerReceiver(wifiScanReceiver, intentFilter);
 
         if ("huntWiFis".equals(call.method)) {
+            resultSubmitted = false;
             wifiManager.startScan();
-            Log.i("TAG", "HELLO4");
         } else {
             result.notImplemented();
         }
-    }
 
+
+
+    }
 }

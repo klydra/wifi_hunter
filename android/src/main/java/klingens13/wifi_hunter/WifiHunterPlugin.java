@@ -28,6 +28,5 @@ public class WiFiHunterPlugin implements MethodCallHandler {
     @Override
     public void onMethodCall(MethodCall call, Result result) {
         WiFiReciever = new WiFiReciever(context, call, result);
-        Log.i("TAG","HELLO2");
     }
 }

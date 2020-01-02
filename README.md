@@ -24,41 +24,35 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  /* Defining the Info Wrapper */
-  WiFiInfoWrapper _wifiObject;                                      
-
+  WiFiInfoWrapper _wifiObject;
 
   @override
   void initState() {
+    scanWiFi();
     super.initState();
-    /* Initializing the Info-Wrapper */
-    initPlatformState();                                            
   }
 
-  Future<void> initPlatformState() async {
+  Future<WiFiInfoWrapper> scanWiFi() async {
     WiFiInfoWrapper wifiObject;
-    
-    /* Platform Exception may occour : try/catch */
+
     try {
       wifiObject = await WiFiHunter.huntRequest;
     } on PlatformException {}
 
-    /* syncing the Info-Wrappers */
-    setState(() {
-      _wifiObject = wifiObject;
-    });
+    return wifiObject;
+  }
+
+  Future<void> scanHandler() async {
+    _wifiObject = await scanWiFi();
+    print("WiFi Results (SSIDs) : ");
+    for (var i = 0; i < _wifiObject.ssids.length; i++) {
+      print("- " + _wifiObject.ssids[i]);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    /* Checking if Response was given already */
-    if (_wifiObject != null) {
-      /* Printing the responses */
-      print("WiFi Results (SSIDs) : ");
-      for (var i = 0; i < _wifiObject.ssids.length; i++) {
-        print("- " + _wifiObject.ssids[i]);
-      }
-    }
+    scanHandler();
 
     return MaterialApp(
       home: Scaffold(
@@ -66,8 +60,16 @@ class _MyAppState extends State<MyApp> {
           title: const Text('WiFiHunter Example App'),
         ),
         body: Center (
-          child: Text ("Scanning... Please check Log for results..."),
-        ),
+          child: Column (
+            children: <Widget>[
+              Text ("Scanning... Please check Log for results..."),
+              FlatButton (
+                child: Text ("ReScan (after prev. scan is finished; await...)"),
+                onPressed: () => scanHandler(),
+              )
+            ],
+          )
+        )
       ),
     );
   }
@@ -90,7 +92,7 @@ The available __SSIDs__, __BSSIDs__ and __capabilities__ ___(= protocols, ex. EE
 while the __frequencies__ and __signal strengths__ ___(dBm)___ are returned as ```List<Integer>```.
 
 
-If you want to run a scan again just execute ```initPlatformState();```, and your ```_wifiObject.``` results will be refreshed.
+If you want to run a scan again just execute ```scanHandler();```, and your ```_wifiObject.``` results will be refreshed.
 Scans, for usual, can run every 3 seconds.
 
 If anyone wants to, _Pull requests are welcome_ 😉 
