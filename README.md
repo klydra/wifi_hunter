@@ -60,6 +60,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('WiFiHunter Example App'),
         ),
         body: Center (
+          mainAxisSize: MainAxisSize.min,
           child: Column (
             children: <Widget>[
               Text ("Scanning... Please check Log for results..."),
@@ -84,6 +85,7 @@ Here is what infos you can get by using this package :
   * Signal strength ...               ```_wifiObject.signalStrengths```
   * Frequencies ...                   ```_wifiObject.frequenies```
   * Capabilities ...                  ```_wifiObject.capabilities```
+  * Channel width ...                 ```_wifiObject.channelWidths```
   
     ... of all WiFi APs in reach.
     
@@ -94,6 +96,10 @@ while the __frequencies__ and __signal strengths__ ___(dBm)___ are returned as `
 
 If you want to run a scan again just execute ```scanHandler();```, and your ```_wifiObject.``` results will be refreshed.
 Scans, for usual, can run every 3 seconds.
+
+
+NOTE : If you don't need to retrieve the WiFi channel width, you can still use v1.0.2 and implement it in applications with a min. SDK version of 16 without any disadvantages.
+
 
 If anyone wants to, _Pull requests are welcome_ 😉 
 

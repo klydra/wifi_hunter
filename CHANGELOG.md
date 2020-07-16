@@ -13,3 +13,8 @@
 ## 1.0.2
 
 * Fix Application Exit
+
+## 1.0.3
+
+* Adding Channel Width Getter
+* Bumping minimum SDK from 16 to 23

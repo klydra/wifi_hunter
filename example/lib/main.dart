@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     _wifiObject = await scanWiFi();
     print("WiFi Results (SSIDs) : ");
     for (var i = 0; i < _wifiObject.ssids.length; i++) {
-      print("- " + _wifiObject.ssids[i]);
+      print("- " + _wifiObject.channelWidths[i]);
     }
   }
 
@@ -48,6 +48,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center (
           child: Column (
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text ("Scanning... Please check Log for results..."),
               FlatButton (

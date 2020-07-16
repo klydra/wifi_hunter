@@ -1,6 +1,6 @@
 name: wifi_hunter
 description: A flutter package to hunt down info from all WiFi APs around you.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/Klingens13/wifi_hunter
 
 environment:

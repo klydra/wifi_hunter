@@ -24,6 +24,7 @@ class WiFiInfoWrapper {
   List<dynamic> _capabilities;
   List<dynamic> _singalStrengths;
   List<dynamic> _frequencies;
+  List<dynamic> _channelWidths;
 
   WiFiInfoWrapper();
 
@@ -34,6 +35,7 @@ class WiFiInfoWrapper {
       this._capabilities = nativeInfo["CAPABILITES"];
       this._singalStrengths = nativeInfo["SIGNALSTRENGTHS"];
       this._frequencies = nativeInfo["FREQUENCIES"];
+      this._channelWidths = nativeInfo["CHANNELWIDTHS"];
     }
   }
 
@@ -55,5 +57,9 @@ class WiFiInfoWrapper {
 
   List<dynamic> get frequenies {
     return this._frequencies;
+  }
+
+  List<dynamic> get channelWidths {
+    return this._channelWidths;
   }
 }

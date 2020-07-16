@@ -44,6 +44,7 @@ public class WiFiReciever {
                     List<String> capabilities = new ArrayList<String>();
                     List<Integer> frequencies = new ArrayList<Integer>();
                     List<Integer> levels = new ArrayList<Integer>();
+                    List<Integer> channelWidth = new ArrayList<Integer>();
 
                     for (ScanResult scanResult : wifiList) {
                         BSSIDs.add(scanResult.BSSID);
@@ -51,6 +52,7 @@ public class WiFiReciever {
                         capabilities.add(scanResult.capabilities);
                         frequencies.add(scanResult.frequency);
                         levels.add(scanResult.level);
+                        channelWidth.add(scanResult.channelWidth);
                     }
 
                     Map<String, Object> data = new HashMap();
@@ -59,6 +61,7 @@ public class WiFiReciever {
                     data.put("CAPABILITES", capabilities);
                     data.put("FREQUENCIES", frequencies);
                     data.put("SIGNALSTRENGTHS", levels);
+                    data.put("CHANNELWIDTHS", channelWidth);
 
                     if (!resultSubmitted) {
                         result.success(data);
