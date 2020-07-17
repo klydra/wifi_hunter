@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     _wifiObject = await scanWiFi();
     print("WiFi Results (SSIDs) : ");
     for (var i = 0; i < _wifiObject.ssids.length; i++) {
-      print("- " + _wifiObject.channelWidths[i]);
+      print("- " + _wifiObject.ssids[i]);
     }
   }
 
