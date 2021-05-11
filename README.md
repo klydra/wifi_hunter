@@ -6,6 +6,13 @@ A flutter package to hunt down info from all WiFi APs around you.
 <a href="https://github.com/klingens13/wifi_hunter/blob/master/LICENSE"><img alt="BSD License" src="https://img.shields.io/github/license/klingens13/wifi_hunter.svg?style=flat-square" style="max-width:100%;"></a>
 <a href="http://makeapullrequest.com" rel="nofollow"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" style="max-width:100%;"></a></p>
 
+## DEPRECATED - Sorry to announce that this project is no longer maintained due to time constraints
+The WiFi Scan options are kind of deprecated in the newer Android versions, and while testing, it randomly errored out sometimes.
+It seems to have something to do with the new way of initiating WiFi scans, where it seems like you're discouraged to actually do them and have strict limits on how often you can call them.
+Also, there haven't seemed to be changes to the other commands used, but as a user pointed out, the results don't really arrive anymore in a lot of cases.
+I sadly don't have the time to look into this issue further, so I'm archiving this project for now, but feel free to fork it :D
+
+
 ## Getting Started
 The plugin only supports the android platform, and it's very unlikely to launch on iOS, because Apple refuses to provide permissions for that, so don't wait for that to come around.
 Credit where credit is due : This package is pretty much based on the __wifi_info_plugin__ from __@VTechJm__, which you can check out here __(https://github.com/VTechJm/wifi_info_plugin)__.
