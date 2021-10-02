@@ -6,112 +6,87 @@ A flutter package to hunt down info from all WiFi APs around you.
 <a href="https://github.com/klingens13/wifi_hunter/blob/master/LICENSE"><img alt="BSD License" src="https://img.shields.io/github/license/klingens13/wifi_hunter.svg?style=flat-square" style="max-width:100%;"></a>
 <a href="http://makeapullrequest.com" rel="nofollow"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" style="max-width:100%;"></a></p>
 
-## DEPRECATED - Sorry to announce that this project is no longer maintained due to time constraints
-The WiFi Scan options are kind of deprecated in the newer Android versions, and while testing, it randomly errored out sometimes.
-It seems to have something to do with the new way of initiating WiFi scans, where it seems like you're discouraged to actually do them and have strict limits on how often you can call them.
-Also, there haven't seemed to be changes to the other commands used, but as a user pointed out, the results don't really arrive anymore in a lot of cases.
-I sadly don't have the time to look into this issue further, so I'm archiving this project for now, but feel free to fork it :D
+## Demonstration
 
+![demo.gif](demo.gif)
 
 ## Getting Started
-The plugin only supports the android platform, and it's very unlikely to launch on iOS, because Apple refuses to provide permissions for that, so don't wait for that to come around.
-Credit where credit is due : This package is pretty much based on the __wifi_info_plugin__ from __@VTechJm__, which you can check out here __(https://github.com/VTechJm/wifi_info_plugin)__.
 
 ```dart
-import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:wifi_hunter/wifi_hunter.dart';
 
-void main() => runApp(MyApp());
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
+
+import 'package:wifi_hunter/wifi_hunter.dart';
+import 'package:wifi_hunter/wifi_hunter_result.dart';
+
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  WiFiInfoWrapper _wifiObject;
-
-  @override
-  void initState() {
-    scanWiFi();
-    super.initState();
-  }
-
-  Future<WiFiInfoWrapper> scanWiFi() async {
-    WiFiInfoWrapper wifiObject;
-
+  WiFiHunterResult wiFiHunterResult = WiFiHunterResult();
+  
+  Future<void> huntWiFis() async {
     try {
-      wifiObject = await WiFiHunter.huntRequest;
-    } on PlatformException {}
-
-    return wifiObject;
-  }
-
-  Future<void> scanHandler() async {
-    _wifiObject = await scanWiFi();
-    print("WiFi Results (SSIDs) : ");
-    for (var i = 0; i < _wifiObject.ssids.length; i++) {
-      print("- " + _wifiObject.ssids[i]);
+      wiFiHunterResult = (await WiFiHunter.huntWiFiNetworks)!;
+    } on PlatformException catch (exception) {
+      print(exception.toString());
     }
+    
+    for (var i = 0; i < wiFiHunterResult.results.length) {
+      print(wiFiHunterResult.results.SSID);
+      print(wiFiHunterResult.results.BSSID);
+      print(wiFiHunterResult.results.capabilities);
+      print(wiFiHunterResult.results.frequency);
+      print(wiFiHunterResult.results.level);
+      print(wiFiHunterResult.results.channelWidth);
+      print(wiFiHunterResult.results.timestamp);
+    }
+
+    if (!mounted) return;
   }
 
   @override
   Widget build(BuildContext context) {
-    scanHandler();
-
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('WiFiHunter Example App'),
-        ),
-        body: Center (
-          mainAxisSize: MainAxisSize.min,
-          child: Column (
-            children: <Widget>[
-              Text ("Scanning... Please check Log for results..."),
-              FlatButton (
-                child: Text ("ReScan (after prev. scan is finished; await...)"),
-                onPressed: () => scanHandler(),
-              )
-            ],
-          )
-        )
+      appBar: AppBar(
+        title: const Text('WiFiHunter example app'),
       ),
+      body: ElevatedButton(
+        onPressed: () => huntWiFis(),
+        child: const Text('Hunt Networks')
+      )
     );
   }
 }
+
+
 ```
 
 ## Functionality and Features
 Here is what infos you can get by using this package :
 
-  * SSIDs ...                         ```_wifiObject.ssids```
-  * BSSIDs ...                        ```_wifiObject.bssids```
-  * Signal strength ...               ```_wifiObject.signalStrengths```
-  * Frequencies ...                   ```_wifiObject.frequenies```
-  * Capabilities ...                  ```_wifiObject.capabilities```
-  * Channel width ...                 ```_wifiObject.channelWidths```
+  * [string] SSIDs
+  * [string] BSSIDs
+  * [string] Signal strength
+  * [int] Frequencies
+  * [int] Capabilities
+  * [int] Channel widths
+  * [int] Timestamps (of information retrieval)
   
     ... of all WiFi APs in reach.
-    
+  
+### Wasn't this package discontinued?
 
-The available __SSIDs__, __BSSIDs__ and __capabilities__ ___(= protocols, ex. EES, WPA2...)___ are returned as Java ```List<String>```,
-while the __frequencies__ and __signal strengths__ ___(dBm)___ are returned as ```List<Integer>```.
-
-
-If you want to run a scan again just execute ```scanHandler();```, and your ```_wifiObject.``` results will be refreshed.
-Scans, for usual, can run every 3 seconds.
-
-
-NOTE : If you don't need to retrieve the WiFi channel width, you can still use v1.0.2 and implement it in applications with a min. SDK version of 16 without any disadvantages.
-
-
-If anyone wants to, _Pull requests are welcome_ 😉 
-
-
-
-
-
-
+Yes, if you remember this package as discontinued, you're not wrong! <br>
+But in honor of <b>Hacktoberfest 2021</b>, I decided to completely recreate this package from ground up, so if anyone has a use for it, enjoy 😄

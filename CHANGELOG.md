@@ -18,3 +18,7 @@
 
 * Adding Channel Width Getter
 * Bumping minimum SDK from 16 to 23
+
+## 1.1.0
+
+* Rereleasing a complete rework of the plugin
