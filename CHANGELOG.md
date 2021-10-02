@@ -21,4 +21,4 @@
 
 ## 1.1.0
 
-* Rereleasing a complete rework of the plugin
+* Re-releasing a complete rework of the plugin
