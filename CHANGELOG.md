@@ -22,3 +22,7 @@
 ## 1.1.0
 
 * Re-releasing a complete rework of the plugin
+
+## 1.1.0+1
+
+* Upgrading to Android API 32

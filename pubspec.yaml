@@ -1,6 +1,6 @@
 name: wifi_hunter
 description: A flutter package to hunt down info from all WiFi APs around you.
-version: 1.1.0
+version: 1.1.0+1
 homepage: https://github.com/klydra/wifi_hunter
 repository: https://github.com/klydra/wifi_hunter.git
 
@@ -15,7 +15,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  lints: ^1.0.1
 
 flutter:
   plugin:

@@ -4,7 +4,7 @@ A flutter package to hunt down info from all WiFi APs around you.
 
 <p><a href="https://pub.dartlang.org/packages/wifi_hunter/" rel="nofollow"><img alt="version" src="https://img.shields.io/pub/v/wifi_hunter.svg?style=flat-square" style="max-width:100%;"></a>
 <a href="https://github.com/klingens13/wifi_hunter/blob/master/LICENSE"><img alt="BSD License" src="https://img.shields.io/github/license/klingens13/wifi_hunter.svg?style=flat-square" style="max-width:100%;"></a>
-<a href="http://makeapullrequest.com" rel="nofollow"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" style="max-width:100%;"></a></p>
+<a href="https://makeapullrequest.com" rel="nofollow"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" style="max-width:100%;"></a></p>
 
 ## Demonstration
 
@@ -76,17 +76,19 @@ class _MyAppState extends State<MyApp> {
 ## Functionality and Features
 Here is what infos you can get by using this package :
 
-  * [string] SSIDs
-  * [string] BSSIDs
-  * [string] Signal strength
-  * [int] Frequencies
-  * [int] Capabilities
-  * [int] Channel widths
-  * [int] Timestamps (of information retrieval)
+  * `String[]` SSIDs
+  * `String[]` BSSIDs
+  * `String[]` Signal strength
+  * `int[]` Frequencies
+  * `int[]` Capabilities
+  * `int[]` Channel widths
+  * `int[]` Timestamps (of information retrieval)
   
     ... of all WiFi APs in reach.
-  
-### Wasn't this package discontinued?
 
-Yes, if you remember this package as discontinued, you're not wrong! <br>
-But in honor of <b>Hacktoberfest 2021</b>, I decided to completely recreate this package from ground up, so if anyone has a use for it, enjoy 😄
+## Running the sample
+When running the sample app, **make sure you've granted it the location permissions** available in the system preferences, as there is currently **no permission dialog implemented** in the example app. <br>
+The permission settings are available under `Settings` > `Apps` > `wifi_hunter_example` > `Permissions` > `Location` > `Allow only while using the app`
+
+## Debugging
+You can get a good overview of pretty much all related log entries by searching for `wifi` in the **Logcat output**.
