@@ -96,7 +96,11 @@ public class WiFiHunterPlugin implements FlutterPlugin, MethodCallHandler {
         data.put("CHANNELWIDTHS", channelWidths);
         data.put("TIMESTAMPS", timestamps);
 
-        result.success(data);
+        try {
+          result.success(data);
+        } catch (Exception e) {
+          System.out.println("Failed to send results to Flutter: " + e.getMessage());
+        }
       } else {
         result.error("2", "WiFi Scan failed. Most likely your app is being throttled. Check out https://developer.android.com/guide/topics/connectivity/wifi-scan#wifi-scan-throttling for more information.", null);
       }
