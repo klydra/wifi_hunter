@@ -75,7 +75,7 @@ public class WiFiHunterPlugin implements FlutterPlugin, MethodCallHandler {
         List<Integer> frequencies = new ArrayList<Integer>();
         List<Integer> levels = new ArrayList<Integer>();
         List<Integer> channelWidths = new ArrayList<Integer>();
-        List<Integer> timestamps = new ArrayList<Integer>();
+        List<Long> timestamps = new ArrayList<Long>();
 
         for (ScanResult scanResult : results) {
           SSIDs.add(scanResult.SSID);
@@ -84,7 +84,7 @@ public class WiFiHunterPlugin implements FlutterPlugin, MethodCallHandler {
           frequencies.add(scanResult.frequency);
           levels.add(scanResult.level);
           channelWidths.add(scanResult.channelWidth);
-          timestamps.add((int) scanResult.timestamp);
+          timestamps.add(scanResult.timestamp);
         }
 
         Map<String, Object> data = new HashMap();
