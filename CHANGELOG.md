@@ -26,3 +26,7 @@
 ## 1.1.0+1
 
 * Upgrading to Android API 32
+
+## 1.1.1
+
+* Add proper integration for Android API 30 and up using the new ```registerScanResultsCallback()``` function

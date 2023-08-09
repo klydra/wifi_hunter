@@ -20,9 +20,8 @@ class WiFiHunter {
     List<int> channelWidths = List<int>.from(networks["CHANNELWIDTHS"]);
     List<int> timestamps = List<int>.from(networks["TIMESTAMPS"]);
 
-    for (var i = 0; i < ssids.length; i++) {
+    for (var i = 0; i < ssids.length; i++)
       result.results.add(WiFiHunterResultEntry(ssids[i], bssids[i], capabilities[i], frequencies[i], levels[i], channelWidths[i], timestamps[i]));
-    }
 
     return result;
   }

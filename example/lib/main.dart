@@ -68,13 +68,13 @@ class _MyAppState extends State<MyApp> {
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: ListTile(
                         leading: Text(wiFiHunterResult.results[index].level.toString() + ' dbm'),
-                        title: Text(wiFiHunterResult.results[index].SSID),
+                        title: Text(wiFiHunterResult.results[index].ssid),
                         subtitle: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('BSSID : ' + wiFiHunterResult.results[index].BSSID),
+                            Text('BSSID : ' + wiFiHunterResult.results[index].bssid),
                             Text('Capabilities : ' + wiFiHunterResult.results[index].capabilities),
                             Text('Frequency : ' + wiFiHunterResult.results[index].frequency.toString()),
                             Text('Channel Width : ' + wiFiHunterResult.results[index].channelWidth.toString()),

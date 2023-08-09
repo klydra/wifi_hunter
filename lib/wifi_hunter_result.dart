@@ -3,13 +3,13 @@ class WiFiHunterResult {
 }
 
 class WiFiHunterResultEntry {
-  String SSID;
-  String BSSID;
+  String ssid;
+  String bssid;
   String capabilities;
   int frequency;
   int level;
   int channelWidth;
   int timestamp;
 
-  WiFiHunterResultEntry(this.SSID, this.BSSID, this.capabilities, this.frequency, this.level, this.channelWidth, this.timestamp);
+  WiFiHunterResultEntry(this.ssid, this.bssid, this.capabilities, this.frequency, this.level, this.channelWidth, this.timestamp);
 }

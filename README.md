@@ -43,8 +43,8 @@ class _MyAppState extends State<MyApp> {
     }
     
     for (var i = 0; i < wiFiHunterResult.results.length) {
-      print(wiFiHunterResult.results.SSID);
-      print(wiFiHunterResult.results.BSSID);
+      print(wiFiHunterResult.results.ssid);
+      print(wiFiHunterResult.results.bssid);
       print(wiFiHunterResult.results.capabilities);
       print(wiFiHunterResult.results.frequency);
       print(wiFiHunterResult.results.level);
@@ -82,13 +82,16 @@ Here is what infos you can get by using this package :
   * `int[]` Frequencies
   * `int[]` Capabilities
   * `int[]` Channel widths
-  * `int[]` Timestamps (of information retrieval)
+  * `long[]` Timestamps (of information retrieval)
   
     ... of all WiFi APs in reach.
 
 ## Running the sample
 When running the sample app, **make sure you've granted it the location permissions** available in the system preferences, as there is currently **no permission dialog implemented** in the example app. <br>
 The permission settings are available under `Settings` > `Apps` > `wifi_hunter_example` > `Permissions` > `Location` > `Allow only while using the app`
+
+## Android WiFi Scan Throttling
+Starting with **Android 8.0** and up, the operating system severely **limits the number of WiFi scans**.<br>*Please keep this limit in mind when implementing your scan issuing logic.*<br>Find out more about these limits on [developer.android.com](https://developer.android.com/guide/topics/connectivity/wifi-scan#wifi-scan-throttling).
 
 ## Debugging
 You can get a good overview of pretty much all related log entries by searching for `wifi` in the **Logcat output**.
