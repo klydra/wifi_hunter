@@ -30,3 +30,9 @@
 ## 1.1.1
 
 * Add proper integration for Android API 30 and up using the new ```registerScanResultsCallback()``` function
+
+## 1.1.1+1
+
+* Update README on pub.dev
+* Bump lints version
+* Add documentation comments

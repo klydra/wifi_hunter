@@ -5,8 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:wifi_hunter/wifi_hunter_result.dart';
 
 class WiFiHunter {
+  /// Method channel to communicate with the native Android Java functions
   static const MethodChannel _channel = MethodChannel('wifi_hunter');
 
+  /// Start WiFi Scan
   static Future<WiFiHunterResult?> get huntWiFiNetworks async {
     final Map<String, dynamic> networks = Map<String, dynamic>.from(await _channel.invokeMethod('huntWiFiNetworks'));
 
