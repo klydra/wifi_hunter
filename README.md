@@ -43,13 +43,13 @@ class _MyAppState extends State<MyApp> {
     }
     
     for (var i = 0; i < wiFiHunterResult.results.length) {
-      print(wiFiHunterResult.results.ssid);
-      print(wiFiHunterResult.results.bssid);
-      print(wiFiHunterResult.results.capabilities);
-      print(wiFiHunterResult.results.frequency);
-      print(wiFiHunterResult.results.level);
-      print(wiFiHunterResult.results.channelWidth);
-      print(wiFiHunterResult.results.timestamp);
+      print(wiFiHunterResult.results[i].ssid);
+      print(wiFiHunterResult.results[i].bssid);
+      print(wiFiHunterResult.results[i].capabilities);
+      print(wiFiHunterResult.results[i].frequency);
+      print(wiFiHunterResult.results[i].level);
+      print(wiFiHunterResult.results[i].channelWidth);
+      print(wiFiHunterResult.results[i].timestamp);
     }
 
     if (!mounted) return;

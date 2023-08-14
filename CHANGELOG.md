@@ -36,3 +36,7 @@
 * Update README on pub.dev
 * Bump lints version
 * Add documentation comments
+
+## 1.1.1+2
+
+* Update README Getting Started example
